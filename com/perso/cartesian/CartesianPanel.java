@@ -34,8 +34,8 @@ public class CartesianPanel extends JPanel {
     public static final int AXIS_STRING_DISTANCE = 20;
 
     // numerate axis
-    public static final int xCoordNumbers = 500000;
-    public static final int yCoordNumbers = 500000;
+    public static final int xCoordNumbers = 100000;
+    public static final int yCoordNumbers = 100000;
     public static final float xLength = (float)(X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
     public static final float yLength = (float)(Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
     public static final int xStep = xCoordNumbers/40;
@@ -46,10 +46,10 @@ public class CartesianPanel extends JPanel {
 
     private List<Point> points;
 
-    public void init(List<Integer> sequence) {
+    public void init(List<Long> sequence) {
         this.points = new ArrayList<Point>();
-        int x = 1;
-        for (Integer y : sequence) {
+        int x = 0;
+        for (Long y : sequence) {
             points.add(
                 new Point(x, y)
             );
