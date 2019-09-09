@@ -3,20 +3,20 @@ package com.perso.cartesian.sequences;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySequence {
+public class VanEck {
 
-    private List<Integer> sequence;
+    private List<Long> sequence;
 
-    public MySequence(int target) {
-        sequence = new ArrayList<Integer>();
-        int current = 0;
+    public VanEck(long target) {
+        sequence = new ArrayList<Long>();
+        long current = 0;
         int id = 0;
         int lastId = 0;
-        sequence.add(0);
+        sequence.add(0l);
         while (id < target) {
             lastId = sequence.subList(0, id).lastIndexOf(sequence.get(id));
             if (lastId == -1) {
-                sequence.add(0);
+                sequence.add(0l);
             }
             else {
                 current = id - lastId;
@@ -26,11 +26,11 @@ public class MySequence {
         }
     }
 
-    public List<Integer> getSequence() {
+    public List<Long> getSequence() {
         return sequence;
     }
 
-    public void setSequence(List<Integer> sequence) {
+    public void setSequence(List<Long> sequence) {
         this.sequence = sequence;
     }
 }
