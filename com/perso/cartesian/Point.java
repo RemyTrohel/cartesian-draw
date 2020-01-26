@@ -1,26 +1,26 @@
 package com.perso.cartesian;
 
 public class Point {
-    private int x, y;
+    private long x, y;
 
-    public Point(int x, int y) {
+    public Point(long x, long y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX() {
+    public long getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(long x) {
         this.x = x;
     }
 
-    public int getY() {
+    public long getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(long y) {
         this.y = y;
     }
 }

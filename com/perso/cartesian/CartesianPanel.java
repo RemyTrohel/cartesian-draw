@@ -1,9 +1,11 @@
 package com.perso.cartesian;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.Toolkit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +13,20 @@ import javax.swing.JPanel;
 
 public class CartesianPanel extends JPanel {
 
+    // Screensize
+    static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
     // x-axis coord constants
     public static final int X_AXIS_FIRST_X_COORD = 50;
-    public static final int X_AXIS_SECOND_X_COORD = 1500;
-    public static final int X_AXIS_Y_COORD = 800;
+    public static final int X_AXIS_SECOND_X_COORD = (int)screenSize.getWidth() - 20;
+    public static final int X_AXIS_Y_COORD = (int)screenSize.getHeight() - 50;
 
     // y-axis coord constants
-    public static final int Y_AXIS_FIRST_Y_COORD = 50;
-    public static final int Y_AXIS_SECOND_Y_COORD = 800;
+    public static final int Y_AXIS_FIRST_Y_COORD = 20;
+    public static final int Y_AXIS_SECOND_Y_COORD = (int)screenSize.getHeight() - 50;
     public static final int Y_AXIS_X_COORD = 50;
 
-    // arrows of axis are represented with "hipotenuse" of
-    // triangle
+    // arrows of axis are represented with "hipotenuse" of triangle
     // now we are define length of cathetas of that triangle
     public static final int FIRST_LENGHT = 10;
     public static final int SECOND_LENGHT = 5;
@@ -34,26 +38,28 @@ public class CartesianPanel extends JPanel {
     public static final int AXIS_STRING_DISTANCE = 20;
 
     // numerate axis
-    public static final int xCoordNumbers = 500000;
-    public static final int yCoordNumbers = 500000;
+    public static final int xCoordNumbers = 10000;
+    public static final int yCoordNumbers = 10000;
     public static final float xLength = (float)(X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
     public static final float yLength = (float)(Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
     public static final int xStep = xCoordNumbers/40;
     public static final int yStep = yCoordNumbers/20;
 
-    // Point
+    // Point size
     public static final int pointDiameter = 1;
 
     private List<Point> points;
 
-    public void init(List<Integer> sequence) {
+    public void init(List<Long> sequence) {
         this.points = new ArrayList<Point>();
-        int x = 1;
-        for (Integer y : sequence) {
-            points.add(
-                new Point(x, y)
-            );
-            x++;
+        int x = 0;
+        if (sequence != null) {
+            for (Long y : sequence) {
+                points.add(
+                    new Point(x, y)
+                );
+                x++;
+            }
         }
     }
     
@@ -65,6 +71,7 @@ public class CartesianPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
 
+        int extraDistance, temp;
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
@@ -84,18 +91,30 @@ public class CartesianPanel extends JPanel {
 
         // draw x-axis numbers
         for (int i = xStep; i <= xCoordNumbers; i=i+xStep) {
+            temp = i;
+            extraDistance = 1;
+            while (temp >= 10) {
+                temp /= 10;
+                extraDistance++;
+            }
             g2.drawLine(X_AXIS_FIRST_X_COORD + Math.round(i * xLength), X_AXIS_Y_COORD - SECOND_LENGHT,
                     X_AXIS_FIRST_X_COORD + Math.round(i * xLength), X_AXIS_Y_COORD + SECOND_LENGHT);
-            g2.drawString(Integer.toString(i), X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
+            g2.drawString(Integer.toString(i), X_AXIS_FIRST_X_COORD + (i * xLength) - (3 * extraDistance),
                     X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
         }
 
         // draw y-axis numbers
         for (int i = yStep; i <= yCoordNumbers; i=i+yStep) {
+            temp = i;
+            extraDistance = 0;
+            while (temp >= 10) {
+                temp /= 10;
+                extraDistance++;
+            }
             g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - Math.round(i * yLength),
                     Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - Math.round(i * yLength));
-            g2.drawString(Integer.toString(i), Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
-                    Y_AXIS_SECOND_Y_COORD - (i * yLength));
+            g2.drawString(Integer.toString(i), Y_AXIS_X_COORD - AXIS_STRING_DISTANCE - (3 * extraDistance),
+                    Y_AXIS_SECOND_Y_COORD - (i * yLength) + 3);
         }
         long startTime = System.currentTimeMillis();
         points.forEach(p -> drawPointOnPanel(p, g));
