@@ -6,26 +6,21 @@ import java.util.List;
 public class VanEck {
 
     private List<Long> sequence;
-    private int[] lastIndex;
 
     public VanEck(long target) {
         sequence = new ArrayList<Long>();
-        lastIndex = new int[(int)target];
-        sequence.add(0l); // id 0
-        sequence.add(0l); // id 1
-        int id = 1;
+        long current = 0;
+        int id = 0;
         int lastId = 0;
-        int temp = 0;
+        sequence.add(0l);
         while (id < target) {
-            lastId = lastIndex[(int)(long)sequence.get(id)];
-            lastIndex[temp] = id;
-            if (lastId == 0 && id != 1) {
+            lastId = sequence.subList(0, id).lastIndexOf(sequence.get(id));
+            if (lastId == -1) {
                 sequence.add(0l);
-                temp = 0;
             }
             else {
-                sequence.add((long)(id - lastId));
-                temp = id - lastId;
+                current = id - lastId;
+                sequence.add(current);
             }
             id++;
         }
