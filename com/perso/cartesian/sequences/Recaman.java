@@ -1,4 +1,4 @@
-package com.perso.cartesian.sequences;
+package sequences;
 
 import java.util.ArrayList;
 import java.util.List;

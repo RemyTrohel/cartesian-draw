@@ -1,9 +1,9 @@
-package com.perso.cartesian;
-
 import javax.swing.JFrame;
 
 public class CartesianFrame extends JFrame {
-    CartesianPanel panel;
+
+	private static final long serialVersionUID = -7701923380968299722L;
+	CartesianPanel panel;
 
     public CartesianFrame() {
         panel = new CartesianPanel();

@@ -1,9 +1,9 @@
-package com.perso.cartesian;
-
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
@@ -13,8 +13,23 @@ import javax.swing.JPanel;
 
 public class CartesianPanel extends JPanel {
 
-    // Screensize
-    static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	private static final long serialVersionUID = 1318338164348050087L;
+	
+	
+	
+	
+
+	/********************* CHANGE SIZE HERE *********************/
+    public static final int xCoordNumbers = 200000;
+    public static final int yCoordNumbers = 200000;
+    /********************* CHANGE SIZE HERE *********************/
+    
+    
+    
+    
+    
+	// Screensize
+    static Rectangle screenSize = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();//Toolkit.getDefaultToolkit().getScreenSize();
 
     // x-axis coord constants
     public static final int X_AXIS_FIRST_X_COORD = 50;
@@ -38,8 +53,6 @@ public class CartesianPanel extends JPanel {
     public static final int AXIS_STRING_DISTANCE = 20;
 
     // numerate axis
-    public static final int xCoordNumbers = 10000;
-    public static final int yCoordNumbers = 10000;
     public static final float xLength = (float)(X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
     public static final float yLength = (float)(Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
     public static final int xStep = xCoordNumbers/40;

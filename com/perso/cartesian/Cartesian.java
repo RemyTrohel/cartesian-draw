@@ -1,11 +1,9 @@
-package com.perso.cartesian;
-
 import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.SwingUtilities;
 
-import com.perso.cartesian.sequences.*;
+import sequences.*;
 
 public class Cartesian {
 
@@ -18,7 +16,7 @@ public class Cartesian {
         long iterations = 0;
         int choice;
         // Sequence choice
-        System.out.println("Veuillez choisir la sÃ©quence en entrant le chiffre associÃ© : ");
+        System.out.println("Veuillez choisir la séquence en entrant le chiffre associé : ");
         System.out.println("1 -> BalancedTernary");
         System.out.println("2 -> Recaman");
         System.out.println("3 -> VanEck");

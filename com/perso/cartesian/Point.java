@@ -1,5 +1,3 @@
-package com.perso.cartesian;
-
 public class Point {
     private long x, y;
 
